@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <div class="sidebar_box">
+        <div class="sb_title">
+            <c:if test="#{user.getIdUser()!= 0}">
+                <a href="cart.xhtml">Košík</a>
+            </c:if>            
+            <c:if test="#{user.getIdUser() == 0}">
+                Košík
+            </c:if>                                     
+            <img src="images/basket.png" width="25" height="20"/></div>
+        
+        <div class="sb_content">        
+            <c:choose>
+                <c:when test="#{user.getIdUser()!= 0}">                
+                    <p>Košík obsahuje <a href="cart.xhtml">#{user.getCartCount()}</a> položek</p>                                   
+                </c:when>            
+                <c:otherwise>                    
+                    <p>Prosím přihlašte se.</p>
+                </c:otherwise>
+            </c:choose>    
+        </div>    
+        <div class="sb_bottom"></div>  
+    </div>
+</html>

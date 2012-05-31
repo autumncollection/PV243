@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <div id="templatemo_menu">
+        <ul>
+            <li><a href="home.xhtml" target="_parent">Úvodní strana</a></li>
+            <!-- aby sa stale po linku zobrazovali vsetky knihy-->
+            <li><h:form styleClass="form">
+                    <h:commandLink value="Nabízené knihy" action="#{books.loadAllBooks()}"/>
+                </h:form></li>           
+            <!-- aby sa stale po linku zobrazovali vsetky knihy-->
+            <c:if test="#{user.userIsLogIn() == false}"><li><a href="registration.xhtml" target="_parent">Registrace</a></li></c:if>
+            <!--
+            show link only if the user is logged in
+            -->
+            <li><a href="information.xhtml" target="_parent">Kontakt</a></li>
+
+
+            <c:if test="#{user.userIsLogIn()}">
+                <c:if test="#{user.userIsAdmin() == true}">
+                    <li><a href="orders.xhtml" target="_parent">Objednávky</a></li>                 
+                    <li><a href="addBook.xhtml" target="_parent">Přidávání knih</a></li>   
+                </c:if>                
+                <c:if test="#{user.userIsAdmin() == false}">
+                    <li><a href="usersOrders.xhtml" target="_parent">Objednávky</a></li>                                         
+                </c:if>                
+            </c:if>
+
+        </ul>    	
+    </div>
+</html>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">Ebooks</ui:insert></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
+        <meta name="keywords" content="books, store, eshop, knihy" />
+        <meta name="description" content="Objednávkový systém zabývající se knihami." />        
+        <link rel="stylesheet" type="text/css" href="css/templatemo_style.css"/>
+    </h:head>
+
+    <h:body>
+      
+        <div id="templatemo_body_wrapper">
+            <div id="templatemo_wrapper">
+                <ui:insert name="header">
+                    <ui:include src="header.xhtml" />
+                </ui:insert>
+                <div id="templatemo_main_top"></div>
+                <div id="templatemo_main"><span id="main_top"></span><span id="main_bottom"></span>
+                    <div id="templatemo_sidebar">
+                        <ui:insert name="menu">
+                          <ui:include src="menu.xhtml" />
+                        </ui:insert>
+                        <ui:insert name="login">
+                          <ui:include src="login.xhtml" />
+                        </ui:insert>
+                      <ui:insert name="shoping">
+                          <ui:include src="shopingCart.xhtml" />
+                        </ui:insert>
+                    </div> <!-- end of sidebar -->
+                    <div id="messages">
+                      <h:messages infoClass="info" errorClass="error" warnClass="warning"/>
+                    </div>
+                    <div id="templatemo_content">
+                        <ui:insert name="content">Content</ui:insert>
+                    </div>
+                    <div class="cleaner"></div>    
+                </div>
+                <div id="templatemo_main_bottom"></div>
+            </div> <!-- end of wrapper -->
+        </div>
+        <ui:insert name="footer">
+          <ui:include src="footer.xhtml"/>
+        </ui:insert>
+    </h:body>
+</html>

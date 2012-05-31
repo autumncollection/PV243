@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+
+
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+            <ui:define name="title">Nákupní košík</ui:define>
+
+
+            <ui:define name="content">        
+                <div class="content_box">
+                    <h1>Nákupní košík</h1>                    
+                    <c:if test="#{user.getBooks().size() == 0}" >
+                        <p>V košíku nemáte žádné položky.</p>
+                    </c:if>
+                    <c:if test="#{user.getBooks().size() != 0}" >
+                        <p>V nákupním košíku jsou momentálně následující položky:</p>
+                        <h:dataTable value="#{user.getBooks()}" var="value">
+                            <h:column>
+
+                                <h:panelGroup rendered="#{empty value.getImage()}" style="width: 100px">
+                                    <img  src="images/books/noimage.jpg" width="100px"/>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{not empty value.getImage()}" style="width: 100px">
+                                    <img  src="#{value.getImage()}" width="100px"/>
+                                </h:panelGroup>
+                                
+                            </h:column>
+                            <h:column>  
+                                <h1><h:outputText value="Titul : #{value.getTitle()}"/></h1> 
+                                <h:form styleClass="cartForm">
+                                    <h:outputText value="Autoři"/> <br/>
+
+                                    <ui:repeat value="#{books.getAuthors(value.getIdBook())}" var="author">
+                                        <h:commandLink value="#{author.getName()} #{author.getSurname()}" action="#{books.selectAuthor(author)}"/> <br/>
+                                    </ui:repeat>
+                                </h:form>
+                                <br/>      
+
+                            </h:column>
+                            <h:column>
+                                <h:form styleClass="form">
+                                    <h:commandLink value="Detail knihy" action="#{detailedBook.selectDetailedBook(value.getIdBook())}" />
+                                </h:form>
+
+                            </h:column>                    
+                            <h:column>
+                                <h:form styleClass="delete">
+                                    <h:commandLink value="Odebrat z košíku" action="#{user.deleteBookFromCart(value.getIdBook())}" /> 
+                                </h:form>
+                            </h:column>
+                        </h:dataTable>
+                        <br />
+                        <p>Celková cena objednávky <span class="price">#{user.getPrize()},- Kč</span>. Po potvrzení objednávky budou knihy zaslány na kontaktní údaje, které jste vyplnili při registraci. </p>
+                        <h:form styleClass="form">
+                            <h:commandButton value="Potvrdit objednávku" action="#{user.submitCurrentOrder()}" />
+                        </h:form>    
+                    </c:if>
+                </div>         
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

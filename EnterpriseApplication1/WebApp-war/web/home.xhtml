@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>
+            
+
+            <ui:define name="shoping">
+                defaultní definované v shopingCart.xhtml
+            </ui:define>
+            -->
+
+            <ui:define name="content">
+                <div class="content_box">                    
+                    <p>
+                        Vítejte na stránkách eBooks, internetového obchodu s knihami. Široká nabídka beletrie, publikací pro děti, poezie i odborné a naučné literatury.                         
+                        Máte-li zájem na nějaké knize, kterou neinzerujeme, nebojte se nás kontaktovat a my ji pro vás rádi obstaráme! 
+                    </p>
+                    <br />
+                    <h5>Doporučujeme</h5>
+                    <p>
+                        V našem obchodě je stále z čeho vybírat. Doporučit můžeme následujícíc tituly, které by rozhodně neměly ujít vaší pozornosti. Pro více informací se
+                        přihlašte!
+                    </p>
+                    <h:dataTable value="#{books.getNewBooks()}" var="value"> 
+                        <h:column>
+
+
+                            <h:panelGroup rendered="#{empty value.getImage()}" style="width: 100px">
+                                <img  src="images/books/noimage.jpg" width="100px"/>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{not empty value.getImage()}" style="width: 100px">
+                                <img  src="#{value.getImage()}" width="100px"/>
+                            </h:panelGroup>
+
+
+
+                        </h:column>
+                        <h:column>  
+                            <h1><h:outputText value="Titul : #{value.getTitle()}"/></h1> 
+                            <h:form styleClass="form">
+                                <h:outputText value="Autoři"/> <br/>
+
+                                <ui:repeat value="#{books.getAuthors(value.getIdBook())}" var="author">
+
+                                    <h:commandLink value="#{author.getName()} #{author.getSurname()}" action="#{books.selectAuthor(author)}"/> <br/>
+                                </ui:repeat>
+                            </h:form>
+                            <br/>      
+
+                        </h:column>
+                        <h:column>
+                            <h:form styleClass="form">
+                                <h:commandLink value="Detaily" action="#{detailedBook.selectDetailedBook(value.getIdBook())}" />
+                            </h:form>
+
+                        </h:column>
+                        <c:if test="#{user.userIsLogIn()}">
+                            <h:column>
+                                <h:form styleClass="addToCart">
+                                    <h:commandLink value="Přidat do košíku" action="#{user.addBookToCart(value.getIdBook())}" />
+                                </h:form>
+
+                            </h:column>
+                        </c:if>
+                    </h:dataTable>  
+
+                </div>                                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

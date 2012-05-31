@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <div id="templatemo_menu">
+    <ul>
+        <li><a href="home.xhtml" target="_parent">Úvodní strana</a></li>
+        <li><a href="books.xhtml" target="_parent">Nabízené knihy</a></li>
+        <!-- if logged in, registration isn't needed -->
+<<<<<<< .mine
+=======
+        <c:if xmlns:c="http://java.sun.com/jsp/jstl/core"
+              test="#{!user.userIsLogIn()}">
+            <li><a href="registration.xhtml" target="_parent">Registrace</a></li>
+        </c:if>
+>>>>>>> .r21
+        <li><a href="information.xhtml" target="_parent">Informace</a></li>
+    </ul>    	
+</div>
+</html>
