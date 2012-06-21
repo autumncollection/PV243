@@ -150,6 +150,26 @@ body{
     margin:0 18px 0 0;
 }
 
+.post .person {
+    clear: both;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px 0;        
+}
+.post .person  img{            
+    float: left;
+    padding: 0 20px;    
+}
+.post .person .whos{        
+    float: left;
+    display: inline-block;
+    width: 360px;
+}
+.post .person .whos h4{        
+    padding-bottom: 10px;
+}
+
+
 .post h1{
     font-size:28px;
     color:#ACCAE7;
