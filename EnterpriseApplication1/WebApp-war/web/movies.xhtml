@@ -17,7 +17,20 @@
             -->
 
             <ui:define name="content">
-                <c:forEach items="#{movies.getAllMovies()}" var="value"> 
+                <h:form styleClass="form">
+                    Herec
+                    <h:inputText label="herec" title="herec" value="#{movies.actor}" id="actor" />
+                    <div/>
+                    Nazev filmu
+                    <h:inputText label="herec" title="herec" value="#{movies.name}" id="name" />
+                    <div/>
+                    Reziser
+                    <h:inputText label="reziser" title="reziser" value="#{movies.director}" id="director" />
+                    <div/>
+                    <h:commandButton action="#{movies.findMovies()}" value="Hledej"/>
+                    
+                </h:form>
+                    <c:forEach items="#{movies.movies}" var="value"> 
                     <div class="movies">
                         <div class="thumb">
                             <img src="movies/matrix.jpg" width="150"/>
