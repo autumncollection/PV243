@@ -133,7 +133,7 @@ public class MovieFacade extends AbstractFacade<Movie> {
         return movies;
                
     }
-    
+       
     public Set<Movie> findByDirector(String director){
         List<Long> ids = em.createNativeQuery("SELECT m.movieId FROM Movie m, Person p, Director d, DirectorAtMovie dm"
                 + "                          WHERE p.surname LIKE #surname AND "
