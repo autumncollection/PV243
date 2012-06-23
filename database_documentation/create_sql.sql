@@ -4,11 +4,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`User`
+-- Table `pv243`.`User`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`User` ;
+DROP TABLE IF EXISTS `pv243`.`User` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`User` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`User` (
   `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `login` VARCHAR(255) NOT NULL ,
   `password` VARCHAR(255) NOT NULL ,
@@ -18,11 +18,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`Role`
+-- Table `pv243`.`Role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`Role` ;
+DROP TABLE IF EXISTS `pv243`.`Role` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`Role` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`Role` (
   `idRole` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `role` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`idRole`) )
@@ -30,11 +30,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`Actor`
+-- Table `pv243`.`Actor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`Actor` ;
+DROP TABLE IF EXISTS `pv243`.`Actor` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`Actor` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`Actor` (
   `idActor` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `idPerson` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`idActor`) )
@@ -42,11 +42,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`Person`
+-- Table `pv243`.`Person`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`Person` ;
+DROP TABLE IF EXISTS `pv243`.`Person` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`Person` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`Person` (
   `idPerson` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NOT NULL ,
   `surname` VARCHAR(255) NOT NULL ,
@@ -56,11 +56,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`Director`
+-- Table `pv243`.`Director`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`Director` ;
+DROP TABLE IF EXISTS `pv243`.`Director` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`Director` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`Director` (
   `idDector` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `idPerson` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`idDector`) )
@@ -68,26 +68,27 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`Movie`
+-- Table `pv243`.`Movie`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`Movie` ;
+DROP TABLE IF EXISTS `pv243`.`Movie` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`Movie` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`Movie` (
   `idMovie` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `movieName` VARCHAR(255) NOT NULL ,
   `movieDate` DATETIME NULL ,
   `length` INT UNSIGNED NULL ,
   `description` TEXT NULL ,
+  `url` CHAR(255) NULL ,
   PRIMARY KEY (`idMovie`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`ActorAtMovie`
+-- Table `pv243`.`ActorAtMovie`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`ActorAtMovie` ;
+DROP TABLE IF EXISTS `pv243`.`ActorAtMovie` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`ActorAtMovie` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`ActorAtMovie` (
   `idActorAtMovie` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `idMovie` INT UNSIGNED NOT NULL ,
   `idActor` INT UNSIGNED NOT NULL ,
@@ -96,16 +97,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `PV243`.`DirectorAtMovie`
+-- Table `pv243`.`DirectorAtMovie`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `PV243`.`DirectorAtMovie` ;
+DROP TABLE IF EXISTS `pv243`.`DirectorAtMovie` ;
 
-CREATE  TABLE IF NOT EXISTS `PV243`.`DirectorAtMovie` (
+CREATE  TABLE IF NOT EXISTS `pv243`.`DirectorAtMovie` (
   `idActorAtMovie` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `idMovie` INT UNSIGNED NOT NULL ,
   `idDirector` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`idActorAtMovie`) )
 ENGINE = InnoDB;
+
 
 INSERT INTO PV243.`Role` (`role`) VALUES ('admin');
 INSERT INTO PV243.`Role` (`role`) VALUES ('moderator');

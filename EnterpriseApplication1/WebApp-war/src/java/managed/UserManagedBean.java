@@ -8,11 +8,13 @@ import beans.RoleFacade;
 import beans.UserFacade;
 import entity.Role;
 import entity.User;
+import inc.MailClient;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -137,17 +139,17 @@ public class UserManagedBean {
 
               m.addInfo("Sucesfull login");
 
-              return "books";
+              return "home";
 
           } else {
               m.addWarning("Wrong login / password");
               idUser = 0;
-              return "home";
+              return "registration";
           }
 
       }
 
-      return "logged";
+      return "home";
   }
   
   /**
@@ -209,6 +211,41 @@ public class UserManagedBean {
         return "admin".equalsIgnoreCase(getRole());
     }
  
+    /**
+     * Registers user.
+     * 
+     * @return String Specification of web page designed to interpret result.
+     */
+    public String registrationUser() {
+        Message m = new Message();
+        if (userFacade.existsUser(login) == true) {
+            m.addWarning("Uživatel s loginem " + this.login + " již v systému existuje");
+            return "false";
+        }
+
+        String s = userFacade.register(login);
+        if (s.equals("false")) {
+            m.addError("Existujicí uživatel s loginem " + this.login);
+            return "false";
+        }
+
+
+
+        MailClient mc = new MailClient();
+        try {
+            mc.sendMail(login, "Vitejte v nasem E-shopu", "Vitejte v nasem E-shopu! Vaše přihlašovací údaje byly vytvoreny takto:\n"
+                    + "Login:" + this.login
+                    + "\nHeslo: " + s);
+        } catch (MessagingException ex) {
+            m.addWarning("Chyba při zasílání emailu!");
+        }
+        m.addInfo("Registrace proběhla v pořádku. Vaše přihlašovací údaje budou zaslány na email uvedený při registraci. Login:" + this.login + " Heslo:" + s + "");
+        this.login = "";
+        return "ok";
+    }
+    
+    
+    
   /**
    * Creates a new instance of UserManagedBean
    */

@@ -346,3 +346,99 @@ body{
 }
 .copyright a:visited{text-decoration:underline}
 .copyright a:hover{text-decoration:none}
+
+.form label
+{
+    float: left;
+    width: 25%;
+}
+
+.info
+{
+    width: 65%;
+    color: #0a0;
+    padding: 5px;
+    padding-left: 25px;
+    border: 1px dotted #0a0;
+    background-image: url('../images/ok.png');
+    background-repeat: no-repeat;
+}
+
+.error
+{
+    color: #f00;
+
+}
+.form input, select
+{
+    border: 1px solid #888;
+    padding: 2px;
+    font-family: Tahoma;
+    width: 60%;
+    color: #333;
+}
+
+.form input:hover
+{
+    border: 1px solid #000;
+}
+
+.form input[type=submit]
+{
+    width: 30%;
+    background-color: #036fab;
+    cursor: pointer;
+    color: #fff;
+}
+
+#messages
+{
+  width: 75%;
+  padding-left: 15px;
+  
+}
+#messages ul
+{
+  list-style-type: none;
+}
+.warning, .error
+{
+    
+    color: #a00;
+    padding: 5px;
+    padding-left: 35px;
+    border: 1px dotted #a00;
+    background-image: url('../images/false.png');
+    background-repeat: no-repeat;    
+}
+
+.ul-none
+{
+    list-style-type: none;
+}
+
+ul.view
+{
+    font-family: Tahoma;
+    font-size: 1.2em;
+}
+
+ul.view li span:first-child
+{
+    float: left;
+    width: 25%;
+}
+.tucne
+{
+    font-weight: bold;
+}
+
+.delete
+{
+    width: 200px; text-align: right;   
+}
+
+.delete a
+{    
+    color: red;
+}

@@ -7,3 +7,4 @@
 /EnterpriseApplication1/dist/
 /EnterpriseApplication1/WebApp-war/dist/
 /EnterpriseApplication1/App-ejb/dist/
+EnterpriseApplication1/App-ejb/src/conf/persistence.xml

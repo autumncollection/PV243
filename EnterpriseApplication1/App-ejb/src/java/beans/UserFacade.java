@@ -4,6 +4,7 @@
  */
 package beans;
 
+import entity.Role;
 import entity.User;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -161,5 +162,63 @@ public class UserFacade extends AbstractFacade<User> {
   public User getUserById(int id) {
       User user = em.find(User.class, id);
       return user;
-  }    
+  } 
+  
+      /**
+     * Verifies user existence.
+     * 
+     * @param login Users login.
+     * @return True if user exists, False otherwise.
+     */
+    public Boolean existsUser(String login) {
+        try {
+            Query q = em.createNamedQuery("User.findByLogin");
+            q.setParameter("login", login);
+            Object u = q.getSingleResult();
+            User user = (User) u;
+            if (user.getIdUser() > 0) {
+                return true;
+            }
+
+            return false;
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
+    
+    /**
+     * This method registeres new user into system.
+     * 
+     * @param login New login.
+     * @return String Generated password on success, false otherwise.
+     */
+    public String register(String login) {
+        try {
+            // if(this.existsUser(login) != false) throw new Exception("Exists user");
+
+            // ----------- Role
+            Role r = new Role();
+            Query q = em.createNamedQuery("Role.findByRole");
+            q.setParameter("role", "user");
+            r = (Role) q.getSingleResult();
+
+            // ----------- Password
+            String publicPassword = getSalt();
+            String salt = getSalt();
+
+
+            User u = new User();
+            u.setLogin(login);
+            u.setIdRole(r.getIdRole());
+            u.setSalt(salt);
+            u.setPassword(hash(salting(publicPassword, salt)));
+            
+            em.persist(u);
+
+            return publicPassword;
+
+        } catch (Exception e) {
+            return "false";
+        }
+    }
 }
