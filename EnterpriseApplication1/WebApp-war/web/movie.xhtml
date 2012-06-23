@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>            
+            -->
+
+            <ui:define name="content">
+
+                <div class="post">
+                    <h1 class="title"><h:outputText value="#{detail.movieName}"/></h1>
+                    <a href="#"><img src="movies/prometheus.jpg" alt="" width="580" height="285" /></a>
+                    <p><h:outputText value="#{detail.description}"/></p>
+                    <h4>Režie</h4>
+
+                    <h:form styleClass="form">
+                        <h:commandLink value="#{detail.director.name} #{detail.director.surname}" action="#{personDetail.selectDetailedPerson(detail.directorid)}" />
+                    </h:form>                        
+                    <div style="clear:both; padding-top: 10px;"/>
+                    <h4>Obsazení</h4>
+
+                    <c:forEach items="#{detail.actors}" var="actor">
+                        <h:form styleClass="form">
+                            <h:commandLink value="#{actor.name} #{actor.surname}" action="#{personDetail.selectDetailedPerson(actor.idPerson)}" />
+                        </h:form>
+                    </c:forEach>
+                    <div style="clear:both; padding-top: 10px;"/>
+                    <h4>Délka filmu</h4>
+                    <p><h:outputText value="#{detail.length}"/> minut</p>
+                    <div style="clear:both;"/>
+                    <h4>Mozne akce</h4>
+                    <h:form styleClass="form">
+                        <h:commandLink value="Pridat do kosiku" action="#{cart.addMovieToCart(detail.idMovie)}" />
+                    </h:form>
+                </div>   
+
+            </ui:define>
+
+            <!--
+            <ui:define name="sidebar">
+                defaultní definované v sidebar.xhtml
+            </ui:define>            
+            -->
+
+        </ui:composition>
+
+    </body>
+</html>

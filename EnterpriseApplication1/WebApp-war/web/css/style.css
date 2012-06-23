@@ -134,7 +134,7 @@ body{
     width: 200px;    
 }
 
-.movies .info {
+.movies .movieinfo {
     display: inline;    
     float: left;
     width: 382px;    
@@ -187,9 +187,18 @@ body{
 }
 .post a:visited, #sidebar .more:visited{text-decoration:underline}
 .post a:hover, #sidebar .more:hover{text-decoration:none}
-.post .more, #sidebar .more{
+.post .more, #sidebar .more, .post form a{
     display:block;
     float:left;
+    line-height:16px;
+    background:url(../images/more.gif) top left no-repeat;
+    padding:0 0 0 22px;
+    margin:0 18px 0 0;
+}
+
+.movies form a{
+    display:block;
+    float:right;
     line-height:16px;
     background:url(../images/more.gif) top left no-repeat;
     padding:0 0 0 22px;

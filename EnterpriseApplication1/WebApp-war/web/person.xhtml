@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>            
+            -->
+
+            <ui:define name="content">
+
+                <div class="post">
+                    <h1 class="title"><h:outputText value="#{personDetail.name} #{personDetail.surname}"/></h1>
+                    <a href="#"><img src="movies/prometheus.jpg" alt="" width="580" height="285" /></a>
+                    <p></p>
+                    <h4>Datum narozeni</h4>
+                    <p><h:outputText value="#{personDetail.birthDate}"/></p>
+                    <div style="clear:both; padding-top: 10px;"/>
+
+                    <c:if test="#{not empty personDetail.actedMovies}">
+                        <h4>Filmografie</h4>                    
+                        <c:forEach items="#{personDetail.actedMovies}" var="movie">
+                            <h:form styleClass="form">
+                                <h:commandLink value="#{movie.movieName}" action="#{detail.selectDetailedMovie(movie.idMovie)}" />
+                            </h:form>
+                        </c:forEach>
+                        <div style="clear:both; padding: 10px;"/>
+                    </c:if>
+
+                    <c:if test="#{not empty personDetail.directedMovies}">
+                        <h4>Režírované filmy</h4>                    
+                        <c:forEach items="#{personDetail.directedMovies}" var="movie">
+                            <h:form styleClass="form">
+                                <h:commandLink value="#{movie.movieName}" action="#{detail.selectDetailedMovie(movie.idMovie)}" />
+                            </h:form>
+                        </c:forEach>
+                        <div style="clear:both; padding-top: 10px;"/>
+                    </c:if>
+                </div>   
+
+            </ui:define>
+
+            <!--
+            <ui:define name="sidebar">
+                defaultní definované v sidebar.xhtml
+            </ui:define>            
+            -->
+
+        </ui:composition>
+
+    </body>
+</html>

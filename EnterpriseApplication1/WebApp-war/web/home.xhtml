@@ -22,7 +22,9 @@
                         <h1 class="title">${value.getMovieName()}</h1>
                         <a href="#"><img src="movies/prometheus.jpg" alt="" width="580" height="285" /></a>
                         <p><h:outputText value="${value.getDescription()}"/></p>
-                        <a href="#" class="more">Detail filmu</a>
+                        <h:form styleClass="form">
+                            <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
+                        </h:form>
                     </div>                    
                 </c:forEach>                                 
                 <div id="pager">

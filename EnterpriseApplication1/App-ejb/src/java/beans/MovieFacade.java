@@ -4,13 +4,14 @@
  */
 package beans;
 
-import entity.Movie;
+import entity.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -37,31 +38,75 @@ public class MovieFacade extends AbstractFacade<Movie> {
         if (numberOfMovies <= 0) {
             return null;
         }
-        
+
         List<Movie> randomMovies = new ArrayList<Movie>();
         Query createdQuery = em.createQuery("SELECT t FROM Movie t");
         List<Movie> movies = createdQuery.getResultList();
-                
+
 
         if (movies.size() <= numberOfMovies) {
             return movies;
-        } else {            
-            Set<Integer> nmbrs = new HashSet<Integer>();            
+        } else {
+            Set<Integer> nmbrs = new HashSet<Integer>();
             while (randomMovies.size() < numberOfMovies) {
                 int rand = (int) (movies.size() * Math.random());
-                if(!nmbrs.contains(rand)){
+                if (!nmbrs.contains(rand)) {
                     randomMovies.add(movies.get(rand));
                     nmbrs.add(rand);
-                }                                
+                }
             }
             return randomMovies;
         }
     }
 
-    public List<Movie> getAllMovies() {                
+    public List<Movie> getAllMovies() {
         Query createdQuery = em.createQuery("SELECT t FROM Movie t");
         List<Movie> movies = createdQuery.getResultList();
-        
-        return movies;        
+
+        return movies;
+    }
+
+    public List<Movie> getMoviesPlayedBy(int idPerson) {
+        List<Movie> result = new ArrayList<Movie>();
+        try {
+            Query createdQuery = em.createQuery("SELECT t FROM Actor t WHERE t.idPerson = " + idPerson);
+            Actor actor = (Actor) createdQuery.getSingleResult();
+            createdQuery = em.createQuery("SELECT m FROM ActorAtMovie m WHERE m.idActor = " + actor.getIdActor());
+            List<ActorAtMovie> movies = createdQuery.getResultList();
+
+            for (ActorAtMovie movie : movies) {
+                result.add(em.find(Movie.class, movie.getIdMovie()));
+            }
+        } catch (NoResultException ex) {
+            System.err.println("Person with id " + idPerson + "havent play in a movie yet.");
+        }
+
+        return result;
+    }
+
+    public List<Movie> getMoviesDirectedBy(int idPerson) {
+        List<Movie> result = new ArrayList<Movie>();
+        try {
+            Query createdQuery = em.createQuery("SELECT t FROM Director t WHERE t.idPerson = " + idPerson);
+            System.err.println("Looking for director with id " + idPerson);
+            Director director = (Director) createdQuery.getSingleResult();
+            createdQuery = em.createQuery("SELECT m FROM DirectorAtMovie m WHERE m.idDirector = " + director.getIdDector());
+            List<DirectorAtMovie> movies = createdQuery.getResultList();
+            
+            for (DirectorAtMovie movie : movies) {
+                result.add(em.find(Movie.class, movie.getIdMovie()));
+            }
+        }catch(NoResultException ex){
+            System.err.println("Person with id " + idPerson + "havent directed a movie yet.");
+        }
+
+        return result;
+    }
+
+    public Movie getMovieById(int idMovie) {
+        Query createdQuery = em.createQuery("SELECT t FROM Movie t WHERE t.idMovie =" + idMovie);
+        Movie movie = (Movie) createdQuery.getSingleResult();
+
+        return movie;
     }
 }
