@@ -161,6 +161,5 @@ public class MovieFacade extends AbstractFacade<Movie> {
                  .getResultList();
         
         return new HashSet<Movie>(movies);
-    }
-    
+    }           
 }

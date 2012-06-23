@@ -17,29 +17,38 @@
             -->
 
             <ui:define name="content">
-                <h:form styleClass="form">
-                    Herec
-                    <h:inputText label="herec" title="herec" value="#{movies.actor}" id="actor" />
-                    <div/>
-                    Nazev filmu
-                    <h:inputText label="herec" title="herec" value="#{movies.name}" id="name" />
-                    <div/>
-                    Reziser
-                    <h:inputText label="reziser" title="reziser" value="#{movies.director}" id="director" />
-                    <div/>
-                    <h:commandButton action="#{movies.findMovies()}" value="Hledej"/>
-                    
+                <div class="post">
+                    <h1 class="title">Vyhledávání titulů</h1>                        
+                    <p>Níže je uveden seznam všech filmů. Hledáte-li nějaký specifický, využijte filtru.</p>                        
+                </div>
+                <h:form styleClass="form">                    
+                    <div class="post">
+                        <h3>Herec</h3>
+                        <h:inputText label="herec" title="herec" value="#{movies.actor}" id="actor" />
+                        <div style="clear: both; padding: 10px 0;"/>
+                        <h3>Nazev filmu</h3>
+                        <h:inputText label="herec" title="herec" value="#{movies.name}" id="name" />
+                        <div style="clear: both; padding: 10px 0;"/>
+                        <h3>Reziser</h3>
+                        <h:inputText label="reziser" title="reziser" value="#{movies.director}" id="director" />
+                        <div style="clear: both; padding: 10px 0;"/>
+
+                        <h:commandButton action="#{movies.findMovies()}" value="Hledej" style="padding: 5px; margin: 10px;"/>
+                        <h:commandButton action="#{movies.resetFilter()}" value="Zrusit filtr" style="padding: 5px; margin: 10px;"/>
+                    </div>
                 </h:form>
-                    <c:forEach items="#{movies.movies}" var="value"> 
+                <c:forEach items="#{movies.movies}" var="value"> 
                     <div class="movies">
                         <div class="thumb">
                             <img src="movies/matrix.jpg" width="150"/>
                         </div>
-                        <div class="info">
+                        <div class="movieinfo">
                             <h3>${value.getMovieName()}</h3>
                             ${value.getDescription()}
                         </div>
-                        <a href="#" class="more">Detail filmu</a>             
+                         <h:form styleClass="form">
+                            <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
+                        </h:form>
                     </div>                   
                 </c:forEach>                 
             </ui:define>

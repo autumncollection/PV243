@@ -41,7 +41,7 @@ public class MoviesTable {
     @PostConstruct
     public void init() {
         firstMovieDisplayed = 0;
-        //movies = movieFacade.findAll();
+        movies = movieFacade.findAll();
     }
 
     /**
@@ -140,6 +140,10 @@ public class MoviesTable {
      */
     public List<Movie> getAllMovies() {       
         return movieFacade.getAllMovies();
+    }
+    
+    public void resetFilter(){
+        this.init();
     }
     
 }

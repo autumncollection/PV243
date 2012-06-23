@@ -40,9 +40,15 @@
                     <p><h:outputText value="#{detail.length}"/> minut</p>
                     <div style="clear:both;"/>
                     <h4>Mozne akce</h4>
-                    <h:form styleClass="form">
-                        <h:commandLink value="Pridat do kosiku" action="#{cart.addMovieToCart(detail.idMovie)}" />
-                    </h:form>
+                    <c:if test="#{user.userIsLogIn() == true}">
+                        <h:form styleClass="form">
+                            <h:commandLink value="Pridat do kosiku" action="#{cart.addMovieToCart(detail.idMovie)}" />
+                        </h:form>
+                    </c:if>
+                    <c:if test="#{user.userIsLogIn() == false}">
+                        <p>Pro zakoupeni titulu je nutne se prihlasit!</p>
+                    </c:if>
+
                 </div>   
 
             </ui:define>
