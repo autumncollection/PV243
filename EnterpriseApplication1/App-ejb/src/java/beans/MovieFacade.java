@@ -161,5 +161,46 @@ public class MovieFacade extends AbstractFacade<Movie> {
                  .getResultList();
         
         return new HashSet<Movie>(movies);
-    }           
+    }   
+    
+    public String addMovie(String movieName, String description, int length, List<String> directors,  List<String> actors)
+    {
+      Movie m = new Movie();
+      m.setMovieName(movieName);
+      m.setDescription(description);
+      m.setLength(length);
+      em.persist(m);
+      em.flush();
+      
+      for (int i = 0; i < directors.size(); i++)
+      {
+        Query q = em.createNamedQuery("Director.findByIdPerson");
+        q.setParameter("idPerson", Integer.parseInt(directors.get(i)));
+        Director d = (Director) q.getSingleResult();
+        if(d != null)
+        {
+          DirectorAtMovie dam = new DirectorAtMovie();
+          dam.setIdMovie(m.getIdMovie());
+          dam.setIdDirector(d.getIdDector());
+          em.persist(dam);
+        }
+      }
+      
+      for (int i = 0; i < actors.size(); i++)
+      {
+        Query q = em.createNamedQuery("Actor.findByIdPerson");
+        System.err.print(directors.get(i));
+        q.setParameter("idPerson", Integer.parseInt(actors.get(i)));
+        Actor a = (Actor) q.getSingleResult();
+        if(a != null)
+        {
+          ActorAtMovie dam = new ActorAtMovie();
+          dam.setIdMovie(m.getIdMovie());
+          dam.setIdActor(a.getIdActor());
+          em.persist(dam);
+        }
+      }
+      
+      return "ok";
+    }
 }

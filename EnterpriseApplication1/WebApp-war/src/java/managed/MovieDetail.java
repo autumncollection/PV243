@@ -47,7 +47,76 @@ public class MovieDetail {
     private int directorid;
     private List<Actor> actorsInfo;    
     private List<Person> actors;
-        
+    private List directors;
+    private List actors_;
+
+  public List getDirectors() {
+    return directors;
+  }
+
+  public void setDirectors(List directors) {
+    this.directors = directors;
+  }
+
+  public List getActors_() {
+    return actors_;
+  }
+
+  public void setActors_(List actors_) {
+    this.actors_ = actors_;
+  }
+    
+    
+    
+  public List<Actor> getActorsInfo() {
+    return actorsInfo;
+  }
+
+  public void setActorsInfo(List<Actor> actorsInfo) {
+    this.actorsInfo = actorsInfo;
+  }
+
+  public Director getDirectorInfo() {
+    return directorInfo;
+  }
+
+  public void setDirectorInfo(Director directorInfo) {
+    this.directorInfo = directorInfo;
+  }
+
+  public void setActors(List<Person> actors) {
+    this.actors = actors;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public void setDirector(Person director) {
+    this.director = director;
+  }
+
+  public void setDirectorid(int directorid) {
+    this.directorid = directorid;
+  }
+
+  public void setIdMovie(int idMovie) {
+    this.idMovie = idMovie;
+  }
+
+  public void setLength(Integer length) {
+    this.length = length;
+  }
+
+  public void setMovieDate(Date movieDate) {
+    this.movieDate = movieDate;
+  }
+
+  public void setMovieName(String movieName) {
+    this.movieName = movieName;
+  }
+     
+    
     
     /**
      * Constructor: Creates a new instance of MovieDetail 
@@ -134,5 +203,19 @@ public class MovieDetail {
         return movieName;
     }
     
+    public String addMovie()
+    {
+      Message m = new Message();
+      String rslt = movieFacade.addMovie(getMovieName(), getDescription(), getLength(), getDirectors(), getActors_());
+      if(rslt == null)
+      {
+        m.addError("err");
+      }
+      if(!rslt.equals("ok"))
+      {    
+        m.addError(rslt);
+      }
+      return "actors";
+    }
     
 }

@@ -7,6 +7,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -32,14 +33,17 @@ public class User implements Serializable {
   private Integer idUser;
   @Basic(optional = false)
   @Column(name = "login")
+  @Length(min=5, max=255)
   private String login;
   @Basic(optional = false)
   @Column(name = "password")
+  @Length(min=5, max=255)
   private String password;
   @Basic(optional = false)
   @Column(name = "idRole")
   private short idRole;
   @Column(name = "salt")
+  @Length(min=0, max=255)
   private String salt;
 
   public User() {

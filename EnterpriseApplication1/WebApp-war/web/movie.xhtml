@@ -29,7 +29,6 @@
                     </h:form>                        
                     <div style="clear:both; padding-top: 10px;"/>
                     <h4>Obsazení</h4>
-
                     <c:forEach items="#{detail.actors}" var="actor">
                         <h:form styleClass="form">
                             <h:commandLink value="#{actor.name} #{actor.surname}" action="#{personDetail.selectDetailedPerson(actor.idPerson)}" />

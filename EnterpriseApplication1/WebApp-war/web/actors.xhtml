@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+
+
+  <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+    <ui:define name="title"><c:if test="#{user.userIsLogIn() == true}">Správa osob</c:if></ui:define>
+      <ui:define name="content">
+         <!--<c:if test="#{user.userIsLogIn() == true}">-->
+          <div class="post">
+              <h1>Správa osob</h1>
+              <h:form styleClass="form">
+                  <p><h:outputLabel value="Jméno" for="name"/>
+                      <h:inputText value="#{personDetail.name}" id="name" />
+                  </p>
+                  <p><h:outputLabel value="Příjmení" for="surname"/>
+                    <h:inputText value="#{personDetail.surname}" id="surname"/>
+                  </p>
+                  <p>
+                    <h:outputLabel value="Herec" for="herec"/>
+                    <h:selectBooleanCheckbox id="herec" value="#{personDetail.isActor}" />
+                  </p>
+                  <p>
+                    <h:outputLabel for="director" value="Režisér" />
+                    <h:selectBooleanCheckbox for="director" value="#{personDetail.isDirector}" />
+                  </p>
+                  <p><h:commandButton type="submit" value="Ulož" action="#{personDetail.addPerson()}" /></p>
+              </h:form>
+
+          </div>
+          <!--</c:if>-->
+      </ui:define>
+
+  </ui:composition>
+    </body>
+</html>

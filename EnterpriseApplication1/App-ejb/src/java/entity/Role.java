@@ -7,6 +7,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Role implements Serializable {
   private Short idRole;
   @Basic(optional = false)
   @Column(name = "role")
+  @Length(min=3, max=255)
   private String role;
 
   public Role() {

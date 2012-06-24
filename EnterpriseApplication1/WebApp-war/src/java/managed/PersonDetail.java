@@ -32,6 +32,8 @@ public class PersonDetail {
     private String name;
     private String surname;
     private Date birthDate;
+    private Boolean isDirector;
+    private Boolean isActor;
     
     private List<Movie> directedMovies;
     private List<Movie> actedMovies;
@@ -42,6 +44,23 @@ public class PersonDetail {
      */
     public PersonDetail() {
     }
+
+    public Boolean getIsActor() {
+      return isActor;
+    }
+
+    public void setIsActor(Boolean isActor) {
+      this.isActor = isActor;
+    }
+
+    public Boolean getIsDirector() {
+      return isDirector;
+    }
+
+    public void setIsDirector(Boolean isDirector) {
+      this.isDirector = isDirector;
+    }
+
 
     @PostConstruct
     public void init() {        
@@ -94,6 +113,18 @@ public class PersonDetail {
         return name;
     }
 
+  public void setBirthDate(Date birthDate) {
+    this.birthDate = birthDate;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
+
     public PersonFacade getPersonFacade() {
         return personFacade;
     }
@@ -102,5 +133,21 @@ public class PersonDetail {
         return surname;
     }
 
+    public String addPerson()
+    {
+      Message m = new Message();
+      String rslt = personFacade.addPerson(getName(), getSurname(), getBirthDate(), getIsActor(), getIsDirector());
+      if(rslt == null)
+      {
+        m.addError("err");
+        return "actors";
+      }
+      if(!rslt.equals("ok"))
+      {    
+        m.addError(rslt);
+        return "actors";
+      }
+      return "actors";
+    }
     
 }

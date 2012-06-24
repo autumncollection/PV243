@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Movie implements Serializable {
   private Integer idMovie;
   @Basic(optional = false)
   @Column(name = "movieName")
+  @Length(min=1, max=255)
   private String movieName;
   @Column(name = "movieDate")
   @Temporal(TemporalType.TIMESTAMP)
@@ -39,6 +41,7 @@ public class Movie implements Serializable {
   private Integer length;
   @Lob
   @Column(name = "description")
+  @Length(min=0, max=255)
   private String description;
 
   public Movie() {

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+
+
+  <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+    <ui:define name="title"><c:if test="#{user.userIsLogIn() == true}">Správa filmů</c:if></ui:define>
+      <ui:define name="content">
+         <!--<c:if test="#{user.userIsLogIn() == true}">-->
+          <div class="post">
+              <h1>Správa filmů</h1>
+              <h:form styleClass="form">
+                  <p><h:outputLabel value="Jméno" for="name"/>
+                      <h:inputText value="#{detail.movieName}" id="name" />
+                  </p>
+                  <p><h:outputLabel value="Popis" for="description"/>
+                    <h:inputTextarea value="#{detail.description}" id="description"/>
+                  </p>                
+                  <p><h:outputLabel value="Délka" for="length"/>
+                    <h:inputText value="#{detail.length}" id="length" />
+                  </p>
+                  <p>
+                    <h:outputLabel value="Režisér" for="director"/>
+                    <h:selectManyMenu id="director" value="#{detail.directors}">
+                      <f:selectItems value="#{director.directors()}" var="value" itemValue="#{value.idPerson}" itemLabel ="#{value.name} #{value.surname}"/>
+                    </h:selectManyMenu>
+                  </p>
+                  <p>
+                    <h:outputLabel value="Herci" for="actor"/>
+                    <h:selectManyMenu id="actor" value="#{detail.actors_}">
+                      <f:selectItems value="#{actor.actors()}" var="value" itemValue="#{value.idPerson}" itemLabel ="#{value.name} #{value.surname}"/>
+                    </h:selectManyMenu>
+                  </p>                
+                  <p><h:commandButton type="submit" value="Ulož" action="#{detail.addMovie()}" /></p>
+                  
+              </h:form>
+
+          </div>
+          <!--</c:if>-->
+      </ui:define>
+
+  </ui:composition>
+    </body>
+</html>

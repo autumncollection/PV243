@@ -18,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
   @NamedQuery(name = "Director.findAll", query = "SELECT d FROM Director d"),
   @NamedQuery(name = "Director.findByIdDector", query = "SELECT d FROM Director d WHERE d.idDector = :idDector"),
-  @NamedQuery(name = "Director.findByIdPerson", query = "SELECT d FROM Director d WHERE d.idPerson = :idPerson")})
+  @NamedQuery(name = "Director.findByIdPerson", query = "SELECT d FROM Director d WHERE d.idPerson = :idPerson")
+})
 public class Director implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id

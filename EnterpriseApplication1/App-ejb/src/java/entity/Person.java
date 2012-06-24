@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -31,9 +32,11 @@ public class Person implements Serializable {
   private Integer idPerson;
   @Basic(optional = false)
   @Column(name = "name")
+  @Length(min=1, max=255)
   private String name;
   @Basic(optional = false)
   @Column(name = "surname")
+  @Length(min=1, max=255)
   private String surname;
   @Column(name = "birthdate")
   @Temporal(TemporalType.TIMESTAMP)
