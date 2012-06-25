@@ -41,7 +41,7 @@ public class MoviesTable {
     @PostConstruct
     public void init() {
         firstMovieDisplayed = 0;
-        movies = movieFacade.findAll();
+        movies = movieFacade.getAllMovies();
     }
 
     /**
@@ -50,7 +50,7 @@ public class MoviesTable {
      * @return String Specification of web page designed to interpret result.
      */
     public String loadAllMovies() {
-        movies = movieFacade.findAll();
+        movies = movieFacade.getAllMovies();
         firstMovieDisplayed = 0;
         return "movies";
     }
@@ -133,6 +133,11 @@ public class MoviesTable {
         return movieFacade.getRandomMovies(number);
     }
     
+    public List<Movie> loadAll(){
+        movies = getAllMovies();
+        return movies;
+    }
+    
     /**
      * Retrieves all movies from database.
      *      
@@ -144,6 +149,12 @@ public class MoviesTable {
     
     public void resetFilter(){
         this.init();
+    }
+    
+    public String deleteMovie(Integer id){
+        movieFacade.deleteMovie(id);
+        resetFilter();
+        return "movies";
     }
     
 }

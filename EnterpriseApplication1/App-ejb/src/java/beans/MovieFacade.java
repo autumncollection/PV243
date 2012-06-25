@@ -176,31 +176,55 @@ public class MovieFacade extends AbstractFacade<Movie> {
       {
         Query q = em.createNamedQuery("Director.findByIdPerson");
         q.setParameter("idPerson", Integer.parseInt(directors.get(i)));
-        Director d = (Director) q.getSingleResult();
-        if(d != null)
+        List<Director> d_list = q.getResultList();
+        if( !d_list.isEmpty() )
         {
-          DirectorAtMovie dam = new DirectorAtMovie();
-          dam.setIdMovie(m.getIdMovie());
-          dam.setIdDirector(d.getIdDector());
-          em.persist(dam);
+            Director d = d_list.get(0);
+            DirectorAtMovie dam = new DirectorAtMovie();
+            dam.setIdMovie(m.getIdMovie());
+            dam.setIdDirector(d.getIdDector());
+            em.persist(dam);
         }
+        
       }
       
       for (int i = 0; i < actors.size(); i++)
       {
         Query q = em.createNamedQuery("Actor.findByIdPerson");
-        System.err.print(directors.get(i));
+        //System.err.print(directors.get(i));
         q.setParameter("idPerson", Integer.parseInt(actors.get(i)));
-        Actor a = (Actor) q.getSingleResult();
-        if(a != null)
+        List<Actor> a_list = q.getResultList();
+        if( !a_list.isEmpty() )
         {
-          ActorAtMovie dam = new ActorAtMovie();
-          dam.setIdMovie(m.getIdMovie());
-          dam.setIdActor(a.getIdActor());
-          em.persist(dam);
+            Actor a = a_list.get(0);
+            ActorAtMovie dam = new ActorAtMovie();
+            dam.setIdMovie(m.getIdMovie());
+            dam.setIdActor(a.getIdActor());
+            em.persist(dam);
         }
       }
       
       return "ok";
+    }
+    
+    public String deleteMovie(Integer id){
+        
+        
+        System.out.println("deleting " + id);
+        
+        Movie m = (Movie) em.createNamedQuery("Movie.findByIdMovie").setParameter("idMovie",id).getSingleResult();
+        List<ActorAtMovie> am_list = em.createNamedQuery("ActorAtMovie.findByIdMovie").setParameter("idMovie",id).getResultList();
+        List<DirectorAtMovie> dm_list =  em.createNamedQuery("DirectorAtMovie.findByIdMovie").setParameter("idMovie",id).getResultList();
+        
+        em.remove(m);
+        for( ActorAtMovie am: am_list){
+            em.remove(am);
+        }
+        for( DirectorAtMovie dm: dm_list){
+            em.remove(dm);
+        }
+                     
+        System.out.println("smazane");
+        return "";
     }
 }

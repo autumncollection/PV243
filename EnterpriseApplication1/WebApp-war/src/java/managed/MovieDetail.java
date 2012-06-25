@@ -128,7 +128,69 @@ public class MovieDetail {
     public void init() {        
         //movies = movieFacade.findAll();
     }
+    
+    private Integer selectedActor;
+    private Integer selectedDirector;
+      
+    public void setSelectedActor(Integer actorId){
+        selectedActor = actorId;
+    }
+    public void setSelectedDirector(Integer directorId){
+        selectedDirector = directorId;
+    }
+    public Integer getSelectedActor(){
+        return selectedActor;
+    }
+    public Integer getSelectedDirector(){
+        return selectedDirector;
+    }
+    
+    public String editSave(){
+        
+        // check no field is empty 
+        if(actors.size() < 1 ){
+            Message err = new Message();
+            err.addError("vypln vsetky polia");
+            
+            return "edit_movie";
+        }  
+           
+        List<String> newActors = new ArrayList<String>();
+        for( Person a: actors){
+            newActors.add( String.valueOf(a.getIdPerson()));
+        }
+        
+        if(selectedDirector == null){
+            selectedDirector = director.getIdPerson();
+        }
+        List<String> newDirectors = new ArrayList<String>();
+        newDirectors.add( String.valueOf(selectedDirector));
+        
+        movieFacade.deleteMovie(idMovie); // deletes movie, actoratmovie,directoratmovie
+        movieFacade.addMovie(getMovieName(), getDescription(), getLength(), newDirectors, newActors);
+             
+        return "movies";
+    }
 
+    public String editMovie(Integer idMovie){
+        selectDetailedMovie(idMovie);
+        return "edit_movie";
+    }
+    
+    public String addSelectedActor(){
+        
+       actors.add(personFacade.getPersonById( selectedActor ));
+       return "edit_movie";
+    }
+    
+    public String removeLastActor(){
+        
+        if( actors.size() > 0 ){
+            actors.remove( actors.size() - 1);
+        }
+        return "edit_movie";
+    }
+    
      /**
      * Retrieves info about movie specified by given ID.
      * 

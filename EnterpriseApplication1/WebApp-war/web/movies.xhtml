@@ -37,7 +37,7 @@
                         <h:commandButton action="#{movies.resetFilter()}" value="Zrusit filtr" style="padding: 5px; margin: 10px;"/>
                     </div>
                 </h:form>
-                <c:forEach items="#{movies.movies}" var="value"> 
+                <c:forEach items="#{movies.loadAll()}" var="value"> 
                     <div class="movies">
                         <div class="thumb">
                             <img src="movies/matrix.jpg" width="150"/>
@@ -46,9 +46,13 @@
                             <h3>${value.getMovieName()}</h3>
                             ${value.getDescription()}
                         </div>
-                         <h:form styleClass="form">
+                        <div class="movieaction">
+                           <h:form styleClass="form">
+                            <h:commandLink value="Zmazat film #{value.getIdMovie()}" action="#{movies.deleteMovie(value.getIdMovie())}" />
+                            <h:commandLink value="Editovat film #{value.getIdMovie()}" action="#{detail.editMovie(value.getIdMovie())}" />
                             <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
-                        </h:form>
+                           </h:form>
+                        </div>
                     </div>                   
                 </c:forEach>                 
             </ui:define>
