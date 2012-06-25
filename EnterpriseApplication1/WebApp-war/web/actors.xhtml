@@ -21,6 +21,9 @@
                   <p><h:outputLabel value="Příjmení" for="surname"/>
                     <h:inputText value="#{personDetail.surname}" id="surname"/>
                   </p>
+                   <p><h:outputLabel value="Obrázek (URL)" for="image"/>
+                    <h:inputText value="#{personDetail.image}" id="image"/>
+                  </p>
                   <p>
                     <h:outputLabel value="Herec" for="herec"/>
                     <h:selectBooleanCheckbox id="herec" value="#{personDetail.isActor}" />

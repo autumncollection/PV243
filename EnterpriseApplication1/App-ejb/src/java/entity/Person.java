@@ -41,6 +41,8 @@ public class Person implements Serializable {
   @Column(name = "birthdate")
   @Temporal(TemporalType.TIMESTAMP)
   private Date birthdate;
+  @Column(name = "image")
+  private String image;
 
   public Person() {
   }
@@ -85,6 +87,14 @@ public class Person implements Serializable {
 
   public void setBirthdate(Date birthdate) {
     this.birthdate = birthdate;
+  }
+  
+  public String getImage(){
+      return this.image;
+  }
+  
+  public void setImage(String image){
+      this.image = image;              
   }
 
   @Override

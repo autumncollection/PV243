@@ -163,12 +163,13 @@ public class MovieFacade extends AbstractFacade<Movie> {
         return new HashSet<Movie>(movies);
     }   
     
-    public String addMovie(String movieName, String description, int length, List<String> directors,  List<String> actors)
+    public String addMovie(String movieName, String image, String description, int length, List<String> directors,  List<String> actors)
     {
       Movie m = new Movie();
       m.setMovieName(movieName);
       m.setDescription(description);
       m.setLength(length);
+      m.setImage(image);
       em.persist(m);
       em.flush();
       

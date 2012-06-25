@@ -40,7 +40,7 @@
                 <c:forEach items="#{movies.loadAll()}" var="value"> 
                     <div class="movies">
                         <div class="thumb">
-                            <img src="movies/matrix.jpg" width="150"/>
+                            <img src="#{value.image}" width="150"/>
                         </div>
                         <div class="movieinfo">
                             <h3>${value.getMovieName()}</h3>

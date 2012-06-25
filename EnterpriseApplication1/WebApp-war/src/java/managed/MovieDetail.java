@@ -45,11 +45,20 @@ public class MovieDetail {
     private Director directorInfo;
     private Person director;
     private int directorid;
+    private String image;
     private List<Actor> actorsInfo;    
     private List<Person> actors;
     private List directors;
     private List actors_;
 
+  public String getImage(){
+      return image;
+  }
+  
+  public void setImage(String image){
+      this.image = image;
+  }
+    
   public List getDirectors() {
     return directors;
   }
@@ -167,9 +176,9 @@ public class MovieDetail {
         newDirectors.add( String.valueOf(selectedDirector));
         
         movieFacade.deleteMovie(idMovie); // deletes movie, actoratmovie,directoratmovie
-        movieFacade.addMovie(getMovieName(), getDescription(), getLength(), newDirectors, newActors);
+        movieFacade.addMovie(getMovieName(), getImage(), getDescription(), getLength(), newDirectors, newActors);
              
-        return "movies";
+        return "";
     }
 
     public String editMovie(Integer idMovie){
@@ -204,6 +213,7 @@ public class MovieDetail {
         movieDate = movie.getMovieDate();
         length = movie.getLength();
         description = movie.getDescription();
+        image = movie.getImage();
         
         directorInfo = directorFacade.getDirectorToMovie(idmovie);  
         director = personFacade.getPersonById(directorInfo.getIdPerson());
@@ -268,7 +278,7 @@ public class MovieDetail {
     public String addMovie()
     {
       Message m = new Message();
-      String rslt = movieFacade.addMovie(getMovieName(), getDescription(), getLength(), getDirectors(), getActors_());
+      String rslt = movieFacade.addMovie(getMovieName(), getImage(), getDescription(), getLength(), getDirectors(), getActors_());
       if(rslt == null)
       {
         m.addError("err");

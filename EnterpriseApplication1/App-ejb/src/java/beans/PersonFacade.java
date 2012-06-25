@@ -42,13 +42,14 @@ public class PersonFacade extends AbstractFacade<Person> {
   
   
   
-  public String addPerson(String name, String surname, Date birthDate, Boolean isActor, Boolean isDirector)
+  public String addPerson(String name, String surname, String url, Date birthDate, Boolean isActor, Boolean isDirector)
   {
     try
     {
      Person p = new Person();
      p.setName(name);
      p.setSurname(surname);
+     p.setImage(url);
      em.persist(p);
      em.flush();
      

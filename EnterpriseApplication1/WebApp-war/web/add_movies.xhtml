@@ -16,7 +16,10 @@
               <h1>Správa filmů</h1>
               <h:form styleClass="form">
                   <p><h:outputLabel value="Jméno" for="name"/>
-                      <h:inputText value="#{detail.movieName}" id="name" />
+                      <h:inputText value="#{detail.movieName}" id="name"/>
+                  </p>
+                  <p><h:outputLabel value="Obrázek (URL)" for="image"/>
+                      <h:inputText value="#{detail.image}" id="image" />
                   </p>
                   <p><h:outputLabel value="Popis" for="description"/>
                     <h:inputTextarea value="#{detail.description}" id="description"/>

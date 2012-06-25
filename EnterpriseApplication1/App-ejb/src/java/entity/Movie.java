@@ -43,6 +43,8 @@ public class Movie implements Serializable {
   @Column(name = "description")
   @Length(min=0, max=255)
   private String description;
+  @Column(name = "image")
+  private String image;
 
   public Movie() {
   }
@@ -94,6 +96,14 @@ public class Movie implements Serializable {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+  
+  public String getImage(){
+      return this.image;
+  }
+  
+  public void setImage(String image){
+      this.image = image;
   }
 
   @Override

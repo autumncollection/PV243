@@ -20,7 +20,7 @@
                 <c:forEach items="#{movies.getRandomMovies(3)}" var="value"> 
                     <div class="post">
                         <h1 class="title">${value.getMovieName()}</h1>
-                        <a href="#"><img src="movies/prometheus.jpg" alt="" width="580" height="285" /></a>
+                        <a href="#"><img src="${value.image}" alt="" width="580"/></a>
                         <p><h:outputText value="${value.getDescription()}"/></p>
                         <h:form styleClass="form">
                             <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
@@ -28,7 +28,7 @@
                     </div>                    
                 </c:forEach>                                 
                 <div id="pager">
-                    <a href="#" class="next">Další filmy</a>
+                    <a href="movies.xhtml" class="next">Další filmy</a>
                 </div>
             </ui:define>
 

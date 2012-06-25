@@ -14,9 +14,9 @@ import javax.inject.Inject;
 
 /** 
  * MoviesListing.java
- * Purpose: class used by books.xhtml to display the books(which are stored in books list)
+ * Purpose: class used by home.xhtml to display the movies
  * 
- * @author Matej Briskar
+ * @author Tomas Sezima
  * @version 1.0
  */
 @ManagedBean(name = "movies")
@@ -31,6 +31,7 @@ public class MoviesTable {
     private String name = new String();
     private String director = new String();
     private String actor = new String();
+    private String image = new String();
     
     
     /**
@@ -76,6 +77,15 @@ public class MoviesTable {
     public List<Movie> getMovies(){
         return movies;
     }
+    
+    public String getImage(){
+        return image;
+    }
+    
+    public void setImage(String image){
+        this.image = image;
+    }
+    
     public String findMovies(){
         
         Set<Movie> byName = movieFacade.findByName(name);
