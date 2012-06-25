@@ -9,11 +9,9 @@ import beans.UserFacade;
 import entity.Role;
 import entity.User;
 import inc.MailClient;
-import java.io.IOException;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 
 /**
@@ -37,7 +35,8 @@ public class UserManagedBean {
   private String password2; 
   private Role role;
   private User user;
-
+  private String userRole;
+  
   public Integer getIdUser() {
     return idUser;
   }
@@ -103,6 +102,31 @@ public class UserManagedBean {
     this.roleFacade = roleFacade;
   }
 
+  public String getUserRole() {
+    return userRole;
+  }
+
+  public void setUserRole(String userRole) {
+    this.userRole = userRole;
+  }
+  
+  public String logout()
+  {
+    setIdUser(0);
+    setUserRole("");
+    return "home";
+  }
+  
+  public String userRole()
+  {
+    if(getUserRole() == null)
+    {
+      return "user";
+    }
+    System.err.print(getUserRole());
+    return getUserRole();
+  }
+  
   public User getUser() {
     return user;
   }
@@ -131,10 +155,12 @@ public class UserManagedBean {
 
           if (a != null) {
               idUser = Integer.parseInt(a.toString());
+              
               // reading attributes from user
               User user = (entity.User) userFacade.find(a);
               login = user.getLogin();
               password = "";
+              setUserRole(roleFacade.getUserRole(user.getIdUser()));
               user.setPassword("");
 
               m.addInfo("Sucesfull login");

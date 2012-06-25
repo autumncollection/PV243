@@ -48,10 +48,11 @@
                         </div>
                         <div class="movieaction">
                            <h:form styleClass="form">
-                            <h:commandLink value="Zmazat film #{value.getIdMovie()}" action="#{movies.deleteMovie(value.getIdMovie())}" />
-                            <h:commandLink value="Editovat film #{value.getIdMovie()}" action="#{detail.editMovie(value.getIdMovie())}" />
                             <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
-                           </h:form>
+                            <c:if test="#{user.userRole() == 'admin'}">
+                            <h:commandLink value="Editovat film #{value.getIdMovie()}" action="#{detail.editMovie(value.getIdMovie())}" />
+                            <h:commandLink value="Zmazat film #{value.getIdMovie()}" action="#{movies.deleteMovie(value.getIdMovie())}" />
+                            </c:if></h:form>
                         </div>
                     </div>                   
                 </c:forEach>                 

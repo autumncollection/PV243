@@ -11,8 +11,9 @@
         <li><a href="movies.xhtml">Filmy</a></li>
         <li><a href="information.xhtml">Kontakt</a></li>
         <li><a href="registration.xhtml"><c:if test="#{user.userIsLogIn() == true}">Správa zákazníka</c:if><c:if test="#{user.userIsLogIn() == false}">Registrace/Přihlášení</c:if></a></li>
-        <li><a href="actors.xhtml">Správa herců</a></li>
-        <li><a href="add_movies.xhtml">Správa filmů</a></li>
+        <li><c:if test="#{user.userIsLogIn() == true}"><h:form><h:commandLink action="#{user.logout()}" value="Odhlásit"/></h:form></c:if></li>
+        <li><c:if test="#{user.userRole() == 'admin'}"><a href="actors.xhtml">Správa herců</a></c:if></li>
+        <li><c:if test="#{user.userRole() == 'admin'}"><a href="add_movies.xhtml">Správa filmů</a></c:if></li>
         <li><a href="cart.xhtml"><c:if test="#{user.userIsLogIn() == true}">Košík</c:if></a></li>
     </ul>
 

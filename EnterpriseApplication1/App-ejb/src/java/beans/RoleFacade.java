@@ -8,6 +8,7 @@ import entity.Role;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +26,14 @@ public class RoleFacade extends AbstractFacade<Role> {
 
   public RoleFacade() {
     super(Role.class);
+  }
+  
+  public String getUserRole(int idUser)
+  {
+    Query q = em.createQuery("SELECT r FROM Role r, User u WHERE r.idRole = u.idRole and u.idUser = :idUser");
+    q.setParameter("idUser", idUser);
+    Role r = (Role) q.getSingleResult();
+    return r.getRole();
   }
   
 }

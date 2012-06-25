@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 /** 
  * MoviesListing.java
@@ -38,7 +39,6 @@ public class MoviesTable {
     public MoviesTable() {
     }
 
-    @PostConstruct
     public void init() {
         firstMovieDisplayed = 0;
         movies = movieFacade.getAllMovies();
