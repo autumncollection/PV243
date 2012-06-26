@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ul id="menu">
+        <li class="home"><a href="home.xhtml">Home</a></li>
+        <li><a href="movies.xhtml">Filmy</a></li>
+        <li><a href="information.xhtml">Kontakt</a></li>
+        <li><a href="registration.xhtml"><c:if test="#{user.userIsLogIn() == true}">Správa zákazníka</c:if><c:if test="#{user.userIsLogIn() == false}">Registrace/Přihlášení</c:if></a></li>
+        <li><c:if test="#{user.userIsLogIn() == true}"><h:form><h:commandLink action="#{user.logout()}" value="Odhlásit"/></h:form></c:if></li>
+        <li><c:if test="#{user.userRole() == 'admin'}"><a href="actors.xhtml">Správa herců</a></c:if></li>
+        <li><c:if test="#{user.userRole() == 'admin'}"><a href="add_movies.xhtml">Správa filmů</a></c:if></li>
+        <li><a href="cart.xhtml"><c:if test="#{user.userIsLogIn() == true}">Košík</c:if></a></li>
+    </ul>
+
+    
+</html>

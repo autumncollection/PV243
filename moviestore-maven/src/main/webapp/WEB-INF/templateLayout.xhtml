@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">MovieStore.cz</ui:insert></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
+        <meta name="keywords" content="movies, store, eshop, filmy" />
+        <meta name="description" content="Objednávkový systém zabývající se filmy." />        
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </h:head>
+
+
+
+    <h:body>
+        <div id="site">
+            <div id="header">	
+                <ui:insert name="menu">
+                    <ui:include src="menu.xhtml" />
+                </ui:insert>
+
+                <div class="social">
+                    <a href="#"><img src="images/icon1.jpg" alt="" width="49" height="49" /></a><a href="#"><img src="images/icon2.jpg" alt="" width="49" height="49" /></a><a href="#"><img src="images/icon3.jpg" alt="" width="49" height="49" /></a>
+                </div>
+                <a href="index.html" class="logo">MovieStore.cz</a>
+
+            </div>
+            <div id="content">
+                <div id="wrapper">
+                    <div id="main">
+                        <div id="posts">
+                            <div id="messages">
+                              <h:messages infoClass="info" errorClass="error" warnClass="warning"/>
+                            </div>
+                            <h2></h2>
+                            <ui:insert name="content">
+                                Default content
+                            </ui:insert>
+                        </div>
+                    </div>
+                    <ui:insert name="sidebar">
+                        <ui:include src="sidebar.xhtml" />
+                    </ui:insert>
+                </div>
+            </div>
+            <ui:insert name="footer">
+                <ui:include src="footer.xhtml" />
+            </ui:insert>            
+        </div>
+    </h:body>
+</html>
+

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>            
+            -->
+
+            <ui:define name="content">
+                <c:forEach items="#{movies.getRandomMovies(3)}" var="value"> 
+                    <div class="post">
+                        <h1 class="title">${value.getMovieName()}</h1>
+                        <a href="#"><img src="${value.image}" alt="" width="580"/></a>
+                        <p><h:outputText value="${value.getDescription()}"/></p>
+                        <h:form styleClass="form">
+                            <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
+                        </h:form>
+                    </div>                    
+                </c:forEach>                                 
+                <div id="pager">
+                    <a href="movies.xhtml" class="next">Další filmy</a>
+                </div>
+            </ui:define>
+
+            <!--
+            <ui:define name="sidebar">
+                defaultní definované v sidebar.xhtml
+            </ui:define>            
+            -->
+
+        </ui:composition>
+
+    </body>
+</html>

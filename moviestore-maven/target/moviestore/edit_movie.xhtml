@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <body>
+
+
+  <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+    <ui:define name="title"><c:if test="#{user.userIsLogIn() == true}">Editace filmu</c:if></ui:define>
+      <ui:define name="content">
+         <!--<c:if test="#{user.userIsLogIn() == true}">-->
+          <div class="post">
+              <h1>Editace filmu</h1>
+              <h:form styleClass="form">
+                  <p><h:outputLabel value="Název" for="name"/>
+                     <h:outputText value="#{detail.movieName}" id="name" />
+                  </p>
+                  <p><h:outputLabel value="Obrázek (URL)" for="image"/>
+                     <h:outputText value="#{detail.image}" id="image" />
+                  </p>
+                  <p><h:outputLabel value="Zmeň popis" for="description"/>
+                    <h:inputTextarea value="#{detail.description}" id="description"/>
+                  </p>                
+                  <p><h:outputLabel value="Zmeň délku" for="length"/>
+                    <h:inputText value="#{detail.length}" id="length" />
+                  </p>
+                  <p>
+                    <h:outputLabel value="Zmeň režiséra" for="director"/>
+                    <h:selectOneMenu id="director" value="#{detail.selectedDirector}">
+                      <f:selectItems value="#{director.directors()}" var="value" itemValue="#{value.idPerson}" itemLabel ="#{value.name} #{value.surname}"/>
+                    </h:selectOneMenu>
+                  </p>
+                  <p>
+                    <h:outputLabel value="Herci" for="herci"/>
+                    
+                    <c:forEach items="#{detail.actors}" var="value"> 
+                        <div>
+                        <h:outputText value="#{value.name} #{value.surname}"/>
+                        </div>
+                    </c:forEach>
+                    
+                    <h:outputLabel value="Pridej herce" for="actor"/>
+                    <h:selectOneMenu id="actor" value="#{detail.selectedActor}">
+                        <f:selectItems value="#{actor.actors()}" var="value" itemValue="#{value.idPerson}" itemLabel ="#{value.name} #{value.surname}"/>
+                            </h:selectOneMenu>
+                    <h:commandButton action="#{detail.addSelectedActor()}" value="Pridej herce" type="submit"/>
+                    <h:commandButton action="#{detail.removeLastActor()}" value="Odeber herce" type="submit"/>
+                    
+                  </p>                
+                  <p><h:commandButton type="submit" value="Ulož" action="#{detail.editSave()}" /></p>
+                  
+              </h:form>
+
+          </div>
+          <!--</c:if>-->
+      </ui:define>
+
+  </ui:composition>
+    </body>
+</html>

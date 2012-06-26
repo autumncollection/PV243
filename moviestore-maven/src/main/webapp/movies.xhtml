@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>            
+            -->
+
+            <ui:define name="content">
+                <div class="post">
+                    <h1 class="title">Vyhledávání titulů</h1>                        
+                    <p>Níže je uveden seznam všech filmů. Hledáte-li nějaký specifický, využijte filtru.</p>                        
+                </div>
+                <h:form styleClass="form">                    
+                    <div class="post">
+                        <h3>Herec</h3>
+                        <h:inputText label="herec" title="herec" value="#{movies.actor}" id="actor" />
+                        <div style="clear: both; padding: 10px 0;"/>
+                        <h3>Nazev filmu</h3>
+                        <h:inputText label="herec" title="herec" value="#{movies.name}" id="name" />
+                        <div style="clear: both; padding: 10px 0;"/>
+                        <h3>Reziser</h3>
+                        <h:inputText label="reziser" title="reziser" value="#{movies.director}" id="director" />
+                        <div style="clear: both; padding: 10px 0;"/>
+
+                        <h:commandButton action="#{movies.findMovies()}" value="Hledej" style="padding: 5px; margin: 10px;"/>
+                        <h:commandButton action="#{movies.resetFilter()}" value="Zrusit filtr" style="padding: 5px; margin: 10px;"/>
+                    </div>
+                </h:form>
+                <c:forEach items="#{movies.loadAll()}" var="value"> 
+                    <div class="movies">
+                        <div class="thumb">
+                            <img src="#{value.image}" width="150"/>
+                        </div>
+                        <div class="movieinfo">
+                            <h3>${value.getMovieName()}</h3>
+                            ${value.getDescription()}
+                        </div>
+                        <div class="movieaction">
+                           <h:form styleClass="form">
+                            <h:commandLink value="Detail filmu" action="#{detail.selectDetailedMovie(value.getIdMovie())}" />
+                            <c:if test="#{user.userRole() == 'admin'}">
+                            <h:commandLink value="Editovat film #{value.getIdMovie()}" action="#{detail.editMovie(value.getIdMovie())}" />
+                            <h:commandLink value="Zmazat film #{value.getIdMovie()}" action="#{movies.deleteMovie(value.getIdMovie())}" />
+                            </c:if></h:form>
+                        </div>
+                    </div>                   
+                </c:forEach>                 
+            </ui:define>
+
+            <!--
+            <ui:define name="sidebar">
+                defaultní definované v sidebar.xhtml
+            </ui:define>            
+            -->
+
+        </ui:composition>
+
+    </body>
+</html>

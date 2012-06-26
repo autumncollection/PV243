@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">    
+            <ui:define name="title">Kontakt</ui:define>
+
+            <!--
+            <ui:define name="menu">
+                defaultní definované v menu.xhtml
+            </ui:define>
+            
+
+            <ui:define name="shoping">
+                defaultní definované v shopingCart.xhtml
+            </ui:define>
+            -->
+
+            <ui:define name="content">
+                <div class="post">
+                    <h1 class="title">Kontaktní informace</h1>
+                    <p>MovieStore je projektem studentů fakulty informatiky Masarykovy univerzity v Brně. Jakékoliv dotazy týkající se systému (či prodeje :) se tedy nebojte snášet přímo na ně.</p>
+                    <div class="person">
+                        <a href="https://is.muni.cz/auth/osoba/395616"><img src="people/tom.jpg" width="100"/></a>
+                        <div class="whos">
+                            <h4>Bc. Tomáš Hrabal</h4>
+                            Vedoucí projektu, kodér, osobní stránka a kontaktní informace dostupné na <a href="https://is.muni.cz/auth/osoba/395616">portálu Masarykovy univerzity</a>.
+                        </div>
+                    </div>
+                     <div class="person">
+                        <a href="https://is.muni.cz/auth/osoba/branislavkurajda"><img src="people/brano.jpg" width="100"/></a>
+                        <div class="whos">
+                            <h4>Bc. Branislav Kurajda</h4>
+                            Kodér, osobní stránka a kontaktní informace dostupné na <a href="https://is.muni.cz/auth/osoba/branislavkurajda">portálu Masarykovy univerzity</a>.
+                        </div>
+                    </div>
+                     <div class="person">
+                        <a href="https://is.muni.cz/auth/osoba/324922"><img src="people/tomas.jpg" width="100"/></a>
+                        <div class="whos">
+                            <h4>Bc. Tomáš Sezima</h4>
+                            Kodér, grafik, osobní stránka a kontaktní informace dostupné na <a href="https://is.muni.cz/auth/osoba/324922">portálu Masarykovy univerzity</a>.
+                        </div>
+                    </div>                    
+                </div>                                
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
