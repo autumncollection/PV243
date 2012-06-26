@@ -53,7 +53,15 @@ All of them are provided by JBoss AS 7 -->
          <groupId>javax.enterprise</groupId>
          <artifactId>cdi-api</artifactId>
          <scope>provided</scope>
-      </dependency>
+ </dependency>
+
+ 
+ <dependency>
+            <groupId>org.jboss.solder</groupId>
+            <artifactId>solder-impl</artifactId>
+            <version>3.1.1.Final</version>
+ </dependency>
+ 
       
       <dependency>
 	<groupId>javax.mail</groupId>

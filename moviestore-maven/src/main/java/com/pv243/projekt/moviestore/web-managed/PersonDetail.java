@@ -4,6 +4,7 @@ import beans.MovieFacade;
 import beans.PersonFacade;
 import entity.Movie;
 import entity.Person;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "personDetail")
 @SessionScoped
-public class PersonDetail {
+public class PersonDetail implements Serializable {
 
     @EJB
     private PersonFacade personFacade;

@@ -2,7 +2,6 @@ package managed;
 
 import beans.MovieFacade;
 import entity.Movie;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +21,7 @@ import javax.inject.Inject;
  */
 @ManagedBean(name = "movies")
 @SessionScoped
-public class MoviesTable implements Serializable{
+public class MoviesTable {
 
     @EJB
     private MovieFacade movieFacade;

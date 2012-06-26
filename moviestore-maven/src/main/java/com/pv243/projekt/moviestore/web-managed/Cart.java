@@ -6,6 +6,7 @@ package managed;
 
 import beans.MovieFacade;
 import entity.Movie;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "cart")
 @SessionScoped
-public class Cart {
+public class Cart implements Serializable{
 
     @EJB
     private MovieFacade movieFacade;

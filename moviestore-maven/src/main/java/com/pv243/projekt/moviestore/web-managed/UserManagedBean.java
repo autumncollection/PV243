@@ -9,10 +9,14 @@ import beans.UserFacade;
 import entity.Role;
 import entity.User;
 import inc.MailClient;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.mail.MessagingException;
+
+import javax.inject.Inject;
+import org.jboss.solder.logging.Logger;
 
 /**
  *
@@ -21,11 +25,15 @@ import javax.mail.MessagingException;
 @ManagedBean(name = "user")
 @SessionScoped
 
-public class UserManagedBean {
+public class UserManagedBean implements Serializable {
   @EJB
   private RoleFacade roleFacade;
   @EJB
   private UserFacade userFacade; 
+  
+  @Inject
+  private Logger log;
+  
   private Integer idUser = 0;
   private String login;
   private String name;
@@ -196,6 +204,7 @@ public class UserManagedBean {
         String back = userFacade.updatePassword(this.idUser, this.password);
         if (back.equals("ok")) {
             m.addOk();
+            log.info("Updated password for user " + this.idUser);
             return "ok";
         }
 
@@ -246,12 +255,14 @@ public class UserManagedBean {
         Message m = new Message();
         if (userFacade.existsUser(login) == true) {
             m.addWarning("Uživatel s loginem " + this.login + " již v systému existuje");
+            log.error("Failed registration for " + login + ": User already exists!");
             return "false";
         }
 
         String s = userFacade.register(login);
         if (s.equals("false")) {
             m.addError("Existujicí uživatel s loginem " + this.login);
+            log.error("Failed registration for " + login + ": User already exists!");
             return "false";
         }
 
@@ -267,6 +278,7 @@ public class UserManagedBean {
         }
         m.addInfo("Registrace proběhla v pořádku. Vaše přihlašovací údaje budou zaslány na email uvedený při registraci. Login:" + this.login + " Heslo:" + s + "");
         this.login = "";
+        log.info("Registration successfull. New user: "  + login);
         return "ok";
     }
     

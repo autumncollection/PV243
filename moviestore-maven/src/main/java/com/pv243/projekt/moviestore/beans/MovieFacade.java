@@ -16,6 +16,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import javax.inject.Inject;
+import org.jboss.solder.logging.Logger;
+
 /**
  *
  * @author tom
@@ -25,6 +28,9 @@ public class MovieFacade extends AbstractFacade<Movie> {
 
     @PersistenceContext(unitName = "App-ejbPU")
     private EntityManager em;
+    
+    @Inject
+    private Logger log;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -39,6 +45,8 @@ public class MovieFacade extends AbstractFacade<Movie> {
         if (numberOfMovies <= 0) {
             return null;
         }
+        
+        log.info("getRandomMovies() called");
 
         List<Movie> randomMovies = new ArrayList<Movie>();
         Query createdQuery = em.createQuery("SELECT t FROM Movie t");
@@ -63,6 +71,8 @@ public class MovieFacade extends AbstractFacade<Movie> {
     public List<Movie> getAllMovies() {
         Query createdQuery = em.createQuery("SELECT t FROM Movie t");
         List<Movie> movies = createdQuery.getResultList();
+        
+        log.info("getAllMovies() called");
 
         return movies;
     }
@@ -81,6 +91,7 @@ public class MovieFacade extends AbstractFacade<Movie> {
         } catch (NoResultException ex) {
             System.err.println("Person with id " + idPerson + "havent play in a movie yet.");
         }
+        log.info("getMoviesPlayedBy " + idPerson);
 
         return result;
     }
@@ -129,7 +140,7 @@ public class MovieFacade extends AbstractFacade<Movie> {
                     .getSingleResult();
             movies.add(m);
         }
-        
+        log.info("findByActor (" + actor + ")");  
         return movies;
                
     }
@@ -226,6 +237,7 @@ public class MovieFacade extends AbstractFacade<Movie> {
         }
                      
         System.out.println("smazane");
+        log.info("deleted a movie with id: " + id);
         return "";
     }
 }

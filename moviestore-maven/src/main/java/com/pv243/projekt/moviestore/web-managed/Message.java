@@ -1,5 +1,6 @@
 package managed;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -10,7 +11,7 @@ import javax.faces.context.FacesContext;
  * @author Tomáš Hrabal
  * @version 1.0
  */
-public class Message {
+public class Message implements Serializable {
 
     private FacesContext fc = FacesContext.getCurrentInstance();
 

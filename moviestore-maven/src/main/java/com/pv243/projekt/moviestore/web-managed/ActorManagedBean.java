@@ -7,6 +7,7 @@ import beans.DirectorFacade;
 import beans.PersonFacade;
 import entity.Director;
 import entity.Person;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +22,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "actor")
 @SessionScoped
-public class ActorManagedBean {
+public class ActorManagedBean implements Serializable {
 
     @EJB
     private ActorFacade actorFacade;    
